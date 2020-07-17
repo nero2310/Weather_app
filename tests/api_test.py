@@ -20,3 +20,15 @@ def test_http_use():
     with raises(UnsafeAdress):
         CurrentWeather(API_KEY, "Warsaw", allow_http=False,
                        api_link="http://api.openweathermap.org/data/2.5/weather?q={}&appid={}")
+
+
+def test_http_use_with_user_permission():
+    assert (CurrentWeather(API_KEY, "Warsaw", allow_http=True,
+                           api_link="http://api.openweathermap.org/data/2.5/weather?q={}&appid={}"))
+
+
+def test_api_http():
+    assert (CurrentWeather(API_KEY,"Warsaw",allow_http=False,
+            api_link="api.openweathermap.org/data/2.5/weather?q={}&appid={}"))
+
+
