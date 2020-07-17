@@ -1,21 +1,29 @@
 import json
-import os
-
-#toDO i guess may be problem with paths Linux and Windows write paths in diffrent way / vs \
-
-def get_config_path(path):
-    return os.path.realpath(path)
+import os.path
+from typing import Dict, List
+from pathlib import Path
 
 
-class CreateBaseConfig:
-    def __init__(self, path_to_config_file):
-        pass
+# toDO i guess may be problem with paths Linux and Windows write paths in different way / vs \
+
+def get_config_path(path_to_config):
+    return os.path.realpath(path_to_config)
+
+
+def create_base_config(path_to_config, content={"api_key": "sample_key"}):
+    path_to_config = Path(path_to_config)
+    content = json.dumps(content, indent=4)
+    if path_to_config.exists():
+        raise FileExistsError
+    else:
+        with open(path_to_config, "w") as file:
+            file.write(content)
 
 
 class Config:
     """
     :arg
-    Take path to Config file as argument
+    Take path to config file as argument
     """
 
     def __init__(self, path_to_config_file):
@@ -35,4 +43,3 @@ class Config:
         return api_key
 
 
-conf = Config("../config.json")
