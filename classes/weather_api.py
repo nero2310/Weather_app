@@ -10,6 +10,8 @@ class CurrentWeather:
     allow_http optional argument if False raise exception if user pass http adres
     instead of https
     api_link optional argument whose contain link to api endpoint
+    :return
+    response from api
     """
 
     def __init__(self, api_key, city_name, allow_http=False,

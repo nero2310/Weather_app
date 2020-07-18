@@ -4,7 +4,7 @@ from classes.weather_api import CurrentWeather
 from classes.configuration_loader import Config
 from classes.exceptions import UnsafeAdress
 
-API_KEY = Config("config.json").get_api_key()
+API_KEY = Config("config.json").get_api_key() # You need to have you own api key to run tests
 
 
 def test_connection():

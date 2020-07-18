@@ -39,7 +39,7 @@ class Config:
     def get_api_key(self):
         with open(get_config_path(self.config_file), "r") as file:
             conig_json = json.load(file)
-            api_key = conig_json["api_key"]
+            api_key = conig_json["api_key"] # I don't catch exception, because program have to have api_key to work
         return api_key
 
 
