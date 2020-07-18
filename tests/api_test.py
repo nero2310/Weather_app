@@ -29,6 +29,9 @@ def test_http_use_with_user_permission():
 
 def test_api_http():
     assert (CurrentWeather(API_KEY,"Warsaw",allow_http=False,
-            api_link="api.openweathermap.org/data/2.5/weather?q={}&appid={}"))
+            api_link="https://api.openweathermap.org/data/2.5/weather?q={}&appid={}"))
 
 
+def test_country():
+    assert (CurrentWeather(API_KEY,city_name="Warsaw", country="pl").api_link
+            == "https://api.openweathermap.org/data/2.5/weather?q=Warsaw,None,pl&appid={}".format(API_KEY))
