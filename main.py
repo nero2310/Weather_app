@@ -17,8 +17,12 @@ def hello_word():
 
 @app.route("/weather")
 def get_weather():
-    weather = CurrentWeather(api_key,"Kraków").make_request()
+    weather = CurrentWeather(api_key,"Sydney",country="CA").make_request()
     return jsonify(weather.json())
 
+@app.route("/weather/<city>")
+def weather(city):
+    weather = CurrentWeather(api_key,city).make_request()
+    return jsonify(weather.json())
 
 app.run(debug=True)  # run flask server

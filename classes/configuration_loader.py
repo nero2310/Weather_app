@@ -35,11 +35,14 @@ class Config:
         except KeyError:
             print("There was not api_key in Config file")
             raise KeyError
+        with open(get_config_path(self.config_file), "r") as file:
+            config_json = json.load(file)
+            self.api_key = config_json["api_key"] # I don't catch exception, because program have to have api_key to work
+            self.temp_unit = config_json["temp_unit"]
 
     def get_api_key(self):
-        with open(get_config_path(self.config_file), "r") as file:
-            conig_json = json.load(file)
-            api_key = conig_json["api_key"] # I don't catch exception, because program have to have api_key to work
-        return api_key
+        return self.api_key
 
+    def get_temperature_unit(self):
+        return self.temp_unit
 
