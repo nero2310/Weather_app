@@ -38,3 +38,6 @@ def test_country():  # https://realpython.com/python-f-strings/
             == f"https://api.openweathermap.org/data/2.5/weather?q=Warsaw,None,pl&appid={API_KEY}")
     assert (CurrentWeather(API_KEY, city_name="Moscow", country="ru").api_link
             == f"https://api.openweathermap.org/data/2.5/weather?q=Moscow,None,ru&appid={API_KEY}")
+
+def test_two_part_city_name():
+    assert (CurrentWeather(API_KEY,city_name="New York").make_request())
