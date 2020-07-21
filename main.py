@@ -1,4 +1,6 @@
 from flask import Flask, jsonify
+
+# from classes.configuration_loader import Config
 from classes.configuration_loader import Config
 from classes.weather_api import CurrentWeather
 
