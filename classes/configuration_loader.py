@@ -6,6 +6,7 @@ from pathlib import Path
 
 # toDO i guess may be problem with paths Linux and Windows write paths in different way / vs \
 
+
 def get_config_path(path_to_config):
     return os.path.realpath(path_to_config)
 
@@ -37,7 +38,9 @@ class Config:
             raise KeyError
         with open(get_config_path(self.config_file), "r") as file:
             config_json = json.load(file)
-            self.api_key = config_json["api_key"] # I don't catch exception, because program have to have api_key to work
+            self.api_key = config_json[
+                "api_key"
+            ]  # I don't catch exception, because program have to have api_key to work
             self.temp_unit = config_json["temp_unit"]
 
     def get_api_key(self):
@@ -45,4 +48,3 @@ class Config:
 
     def get_temperature_unit(self):
         return self.temp_unit
-

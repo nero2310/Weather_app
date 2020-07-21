@@ -1,4 +1,3 @@
-import os
 import json
 from pytest import raises
 from classes.configuration_loader import Config, create_base_config

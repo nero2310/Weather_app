@@ -16,8 +16,15 @@ class CurrentWeather:
                                           .format(city_name,state_code,country,api_key)
     """
 
-    def __init__(self, api_key: AnyStr, city_name: AnyStr, state_code=None, country=None, allow_http=False,
-                 api_link="""https://api.openweathermap.org/data/2.5/weather?q={0},{1},{2}&appid={3}"""):
+    def __init__(
+        self,
+        api_key: AnyStr,
+        city_name: AnyStr,
+        state_code=None,
+        country=None,
+        allow_http=False,
+        api_link="""https://api.openweathermap.org/data/2.5/weather?q={0},{1},{2}&appid={3}""",
+    ):
         self.api_key = api_key
         self.city_name = city_name
         self.country = country
@@ -30,7 +37,9 @@ class CurrentWeather:
         if self.api_link[:8] != "https://":
             if self.api_link[:4] == "http":
                 if self.api_link[:5] != "https" and allow_http is False:
-                    raise UnsafeAdress("Use https instead of http")  # i should write custom_exception to now use http
+                    raise UnsafeAdress(
+                        "Use https instead of http"
+                    )  # i should write custom_exception to now use http
                 if self.api_link[:5] != "https" and allow_http is True:
                     return self.api_link
             self.api_link = "https://" + self.api_link
