@@ -1,7 +1,6 @@
 from flask import Flask, jsonify, render_template
 from classes.exceptions import UnsafeAdress
 
-# from classes.configuration_loader import Config
 from classes.configuration_loader import Config
 from classes.weather_api import CurrentWeather
 
@@ -33,6 +32,11 @@ def weather_city(city):
 def weather_city_country(city, country):
     weather_data = CurrentWeather(api_key, city, country=country).make_request()
     return jsonify(weather_data.json())
+
+
+@app.errorhandler(UnsafeAdress)
+def unsafe_adress_exception(UnsafeAdress):
+    return render_template("not_safe_adress_exception.html")
 
 
 @app.errorhandler(Exception)  # this will catch all not caught exceptions
