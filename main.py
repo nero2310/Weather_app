@@ -1,4 +1,5 @@
-from flask import Flask, jsonify,render_template
+from flask import Flask, jsonify, render_template
+from classes.exceptions import UnsafeAdress
 
 # from classes.configuration_loader import Config
 from classes.configuration_loader import Config
@@ -24,11 +25,19 @@ def get_weather():
 @app.route("/weather/<city>")
 def weather_city(city):
     weather_data = CurrentWeather(api_key, city).make_request().json()
-    return render_template("weather.html",content=weather_data)
+    weather_data["cod"]
+    return render_template("weather.html", content=weather_data)
+
 
 @app.route("/weather/<city>/<country>")
-def weather_city_country(city,country):
-    weather_data = CurrentWeather(api_key,city,country=country).make_request()
+def weather_city_country(city, country):
+    weather_data = CurrentWeather(api_key, city, country=country).make_request()
     return jsonify(weather_data.json())
+
+
+@app.errorhandler(Exception)  # this will catch all not caught exceptions
+def unexpected_exception(Exception):
+    return render_template("unexpected_exception.html")
+
 
 app.run(debug=True)  # run flask server
