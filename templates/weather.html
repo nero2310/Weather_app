@@ -1,7 +1,9 @@
 {% extends "base_bootstrap.html" %}
 {% block title %}
-Weather {{ content["city_name"]|tojson }}
+Weather {{ weather["city_name"]}}
 {% endblock %}
 {% block content %}
-{{content|tojson}}
+{% for key,value in weather.items() %}
+    {{key}}:{{value}}<br>
+{% endfor %}
 {% endblock %}
