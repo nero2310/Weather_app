@@ -30,7 +30,9 @@ def temp_converter(value, input_unit, output_unit, accuracy=1):
     if input_unit == "fahrenheit" and output_unit == "kelvin":
         return round((value + 459.67) * 5 / 9, accuracy)
 
+
 class WeatherParser:
+
     def __init__(self,data):
         self.property = {}
         self.property["temp"] = data["main"]["temp"]
@@ -39,6 +41,26 @@ class WeatherParser:
         self.property["sunrise"] = data["sunrise"]
         self.property["sunset"] = data["sunset"]
 
+    def temp_converter(self,input_unit,output_unit,accuracy=1):
+        try:
+            value = float(property["temp"])
+        except ValueError:
+            value = value.replace(",", ".", 1)
+            value = float(value)
 
+        if input_unit == "kelvin" and output_unit == "celsius":
+            value = round(value - 273.15, accuracy)
+        if input_unit == "celsius" and output_unit == "kelvin":
+            value = round(value + 273.15, accuracy)
+        if input_unit == "fahrenheit" and output_unit == "celsius":
+            value = round((value - 32) / 1.8, accuracy)
+        if input_unit == "celsius" and output_unit == "fahrenheit":
+            value = round((value * 1.8) + 32, accuracy)
+        if input_unit == "kelvin" and output_unit == "fahrenheit":
+            value = round(value * 1.8 - 459.67, accuracy)
+        if input_unit == "fahrenheit" and output_unit == "kelvin":
+            value = round((value + 459.67) * 5 / 9, accuracy)
+
+        property["temp"] = value
 
 
