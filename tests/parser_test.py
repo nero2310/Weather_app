@@ -1,4 +1,14 @@
 from classes.json_parser import temp_converter
+from classes.json_parser import WeatherParser
+
+weather_to_parse = {"main": {"temp": 200}, "name": "Warsaw", "country": "Poland"}
+
+# Example how test dictionary should look like for WeatherParser
+# self.property["temp"] = data["main"]["temp"]
+# self.property["city_name"] = data["name"]
+# self.property["country"] = data["country"]
+# self.property["sunrise"] = data.get("sunrise")
+# self.property["sunset"] = data.get("sunset")
 
 
 def test_kelvins_to_cel():
@@ -9,6 +19,12 @@ def test_kelvins_to_cel():
     assert temp_converter(10, "kelvin", "fahrenheit", accuracy=2) == -441.67
     assert temp_converter(10, "fahrenheit", "kelvin", accuracy=2) == 260.93
     assert temp_converter("1,2", "celsius", "fahrenheit", accuracy=2) == 34.16
+
+
+def test_temp_parser():
+    dictonary = WeatherParser(weather_to_parse)
+    dictonary.temp_converter("kelvin", "celsius")
+    assert dictonary.data()["temp"] == -73.1
 
 
 def test_country_names_conversion():  # toDO convert country shortcut to full country name
