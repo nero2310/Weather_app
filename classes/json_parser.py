@@ -1,3 +1,6 @@
+from datetime import datetime
+
+
 # Kelvins-273.15 = Celsius
 # Celsius = (Fahrenheit-32)/1.8
 
@@ -68,6 +71,17 @@ class WeatherParser:
             temperature = round((temperature + 459.67) * 5 / 9, accuracy)
 
         self.property["temp"] = temperature
+
+    def timestamp_to_date(self, timestamp, time_format="%H:%M:%S", timezone=0):
+        """
+        Convert timestamp (number of seconds from 1.1.1970) to user friendly date format
+        :param timestamp:
+        :param timezone:
+        :param time_format:
+        :return:
+        """
+        timestamp = int(timestamp)+timezone
+        return datetime.utcfromtimestamp(timestamp).strftime(time_format)
 
     def data(self):
         return self.property
