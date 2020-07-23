@@ -1,7 +1,8 @@
-from flask import Flask, jsonify, render_template, request, redirect, url_for
+from flask import Flask,render_template, request, redirect, url_for
+from json import loads,dumps
 from classes.exceptions import UnsafeAdress
 
-from classes.json_parser import temp_converter
+from classes.json_parser import temp_converter,WeatherParser
 from classes.configuration_loader import Config
 from classes.weather_api import CurrentWeather
 from forms import GetWeatherForm
@@ -36,11 +37,12 @@ def weather(city=None, country=None):
         city = request.form["city_name"]
         country = request.form.get("country")
         weather_data = CurrentWeather(api_key, city, state_code=None, country=country).make_request().json()
-        weather_data["main"]["temp"] = temp_converter(weather_data["main"]["temp"], "kelvin", "celsius") #toDO maybe modify temp_converter
-        # to allow pass to temp_converet whole json_obj
-        weather_data["main"]["temp_max"] = temp_converter(weather_data["main"]["temp_max"], "kelvin", "celsius")
-        weather_data["main"]["temp_min"] = temp_converter(weather_data["main"]["temp_min"], "kelvin", "celsius")
-        return render_template("weather.html", content=weather_data)
+        parser = WeatherParser(weather_data)
+        parser.temp_converter()
+        weather_data = parser.data()
+        json_dict = loads(dumps(weather_data))
+        print(type(json_dict))
+        return render_template("weather.html", content=json_dict)
     else:
         return redirect(url_for("get_weather")) # It will redirect user if he try to go to /weather_data manually
 

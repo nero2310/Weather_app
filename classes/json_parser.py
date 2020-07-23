@@ -34,15 +34,30 @@ def temp_converter(value, input_unit, output_unit, accuracy=1):
         return round((value + 459.67) * 5 / 9, accuracy)
 
 
+def timestamp_to_date(timestamp, timezone=0, time_format="%H:%M:%S"):
+    """
+    Convert timestamp (number of seconds from 1.1.1970) to user friendly date format
+    :param timestamp: number of seconds from 1.1.1970
+    :param timezone: number of seconds whose should be add/delted to obtain local time
+    :param time_format: define how output time should look like more info in https://strftime.org/
+    """
+    timestamp = int(timestamp) + timezone
+    return datetime.utcfromtimestamp(timestamp).strftime(time_format)
+
+
 class WeatherParser:
 
     def __init__(self, data):
         self.property = {}
-        self.property["temp"] = data["main"]["temp"]
         self.property["city_name"] = data["name"]
-        self.property["country"] = data["country"]
-        self.property["sunrise"] = data.get("sunrise")
-        self.property["sunset"] = data.get("sunset")
+        self.property["country"] = data["sys"]["country"]
+        self.property["temp"] = data["main"]["temp"]
+        sunrise = data.get("sys", {}).get("sunrise")
+        sunset = data.get("sys", {}).get("sunset")
+        self.property["timezone"] = data.get("timezone")
+        self.property["sunrise"] = timestamp_to_date(sunrise,self.property["timezone"])
+        self.property["sunset"] = timestamp_to_date(sunset,self.property["timezone"])
+
 
     def temp_converter(self, input_unit="kelvin", output_unit="celsius", accuracy=1):
         """
@@ -71,17 +86,6 @@ class WeatherParser:
             temperature = round((temperature + 459.67) * 5 / 9, accuracy)
 
         self.property["temp"] = temperature
-
-    def timestamp_to_date(self, timestamp, time_format="%H:%M:%S", timezone=0):
-        """
-        Convert timestamp (number of seconds from 1.1.1970) to user friendly date format
-        :param timestamp:
-        :param timezone:
-        :param time_format:
-        :return:
-        """
-        timestamp = int(timestamp)+timezone
-        return datetime.utcfromtimestamp(timestamp).strftime(time_format)
 
     def data(self):
         return self.property
