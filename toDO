@@ -1,4 +1,5 @@
 Specify the city country (city names can be the same in the multiple countries) Work 
 Normal looking main menu (Maybe use bootstrap) WIP
 User specify city,name,county WIP
-__init__.py 
+Site with country codes
+Change shortcut country cod for full country name
