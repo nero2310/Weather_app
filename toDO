@@ -1,5 +1,9 @@
-Specify the city country (city names can be the same in the multiple countries) Work 
+Very Important
 Normal looking main menu (Maybe use bootstrap) WIP
-User specify city,name,county WIP
-Site with country codes
+Change weather_form country to list of all countries codes organized in list
+Important
 Change shortcut country cod for full country name
+Form use GET instead it should use POST, fix it
+Less Important
+Add https support
+
