@@ -24,24 +24,18 @@ def get_weather():
     form = GetWeatherForm()
     if request.method == "POST":
         city = request.form["city_name"]
-        print(city)
-        return redirect(url_for("weather_city", city=city))
+        country = request.form.get("country")
+        return redirect(url_for("weather_city", city=city, country=country))
     return render_template("weather_form.html", form=form)
 
 
-@app.route("/weather_data/<city>", methods=["POST","GET"])
-def weather_city(city):
-    weather_data = CurrentWeather(api_key, city).make_request().json()
+@app.route("/weather_data/<city>/<country>", methods=["POST", "GET"])
+def weather_city(city, country):
+    weather_data = CurrentWeather(api_key, city, state_code=None, country=country).make_request().json()
     weather_data["main"]["temp"] = temp_converter(weather_data["main"]["temp"], "kelvin", "celsius")
     weather_data["main"]["temp_max"] = temp_converter(weather_data["main"]["temp_max"], "kelvin", "celsius")
     weather_data["main"]["temp_min"] = temp_converter(weather_data["main"]["temp_min"], "kelvin", "celsius")
     return render_template("weather.html", content=weather_data)
-
-
-@app.route("/weather/<city>/<country>")
-def weather_city_country(city, country):
-    weather_data = CurrentWeather(api_key, city, country=country).make_request()
-    return jsonify(weather_data.json())
 
 
 @app.errorhandler(UnsafeAdress)
