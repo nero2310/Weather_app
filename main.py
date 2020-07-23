@@ -24,11 +24,15 @@ def get_weather():
     form = GetWeatherForm()
     if request.method == "POST":
         city = request.form["city_name"]
-        country = request.form.get("country")
-        return redirect(url_for("weather_city", city=city, country=country))
+        country = request.form.get("country", "None")
+        if country is not None and country != "":
+            return redirect(url_for("weather_city", city=city, country=country))
+        else:
+            return redirect(url_for("weather_city", city=city))
     return render_template("weather_form.html", form=form)
 
 
+@app.route("/weather_data/<city>", defaults={'country': None})
 @app.route("/weather_data/<city>/<country>", methods=["POST", "GET"])
 def weather_city(city, country):
     weather_data = CurrentWeather(api_key, city, state_code=None, country=country).make_request().json()
