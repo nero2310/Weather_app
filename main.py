@@ -42,7 +42,7 @@ def weather(city=None, country=None):
         weather_data = parser.data()
         json_dict = loads(dumps(weather_data))
         print(type(json_dict))
-        return render_template("weather.html", content=json_dict)
+        return render_template("weather.html", weather=json_dict)
     else:
         return redirect(url_for("get_weather")) # It will redirect user if he try to go to /weather_data manually
 
