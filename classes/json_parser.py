@@ -2,7 +2,7 @@
 # Celsius = (Fahrenheit-32)/1.8
 
 
-def temp_converter(value, input_unit, output_unit, accuracy=2):
+def temp_converter(value, input_unit, output_unit, accuracy=1):
     """
     Convert temperature unit from one metric system to another
     Supported systems celsius,kelvin,fahrenheit
@@ -29,3 +29,16 @@ def temp_converter(value, input_unit, output_unit, accuracy=2):
         return round(value * 1.8 - 459.67, accuracy)
     if input_unit == "fahrenheit" and output_unit == "kelvin":
         return round((value + 459.67) * 5 / 9, accuracy)
+
+class WeatherParser:
+    def __init__(self,data):
+        self.property = {}
+        self.property["temp"] = data["main"]["temp"]
+        self.property["city_name"] = data["name"]
+        self.property["country"] = data["country"]
+        self.property["sunrise"] = data["sunrise"]
+        self.property["sunset"] = data["sunset"]
+
+
+
+

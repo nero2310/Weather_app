@@ -36,7 +36,8 @@ def weather(city=None, country=None):
         city = request.form["city_name"]
         country = request.form.get("country")
         weather_data = CurrentWeather(api_key, city, state_code=None, country=country).make_request().json()
-        weather_data["main"]["temp"] = temp_converter(weather_data["main"]["temp"], "kelvin", "celsius")
+        weather_data["main"]["temp"] = temp_converter(weather_data["main"]["temp"], "kelvin", "celsius") #toDO maybe modify temp_converter
+        # to allow pass to temp_converet whole json_obj
         weather_data["main"]["temp_max"] = temp_converter(weather_data["main"]["temp_max"], "kelvin", "celsius")
         weather_data["main"]["temp_min"] = temp_converter(weather_data["main"]["temp_min"], "kelvin", "celsius")
         return render_template("weather.html", content=weather_data)
