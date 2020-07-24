@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
-from Weather_app.exceptions import UnsafeAdress
+from Weather_app.exceptions import UnsafeAddress
 
 from Weather_app.json_parser import WeatherParser
 from Weather_app.configuration_loader import Config
@@ -39,8 +39,8 @@ def weather_summary():
         return redirect(url_for("get_weather"))  # It will redirect user if he try to go to /weather_data manually
 
 
-@app.errorhandler(UnsafeAdress)
-def unsafe_adress_exception(UnsafeAdress):
+@app.errorhandler(UnsafeAddress)
+def unsafe_address_exception(UnsafeAddress):
     return render_template("not_safe_adress_exception.html")
 
 

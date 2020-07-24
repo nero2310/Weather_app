@@ -38,7 +38,7 @@ def timestamp_to_date(timestamp, timezone=0, time_format="%H:%M:%S"):
     """
     Convert timestamp (number of seconds from 1.1.1970) to user friendly date format
     :param timestamp: number of seconds from 1.1.1970
-    :param timezone: number of seconds whose should be add/delted to obtain local time
+    :param timezone: number of seconds whose should be add/deleted to obtain local time
     :param time_format: define how output time should look like more info in https://strftime.org/
     """
     if timestamp is not None:
@@ -66,10 +66,11 @@ class WeatherParser:
         self.property["sunrise"] = timestamp_to_date(sunrise, self.property["timezone"])
         self.property["sunset"] = timestamp_to_date(sunset, self.property["timezone"])
 
-    def temp_converter(self,value,input_unit="kelvin", output_unit="celsius", accuracy=1):
+    def temp_converter(self, value, input_unit="kelvin", output_unit="celsius", accuracy=1):
         """
            Convert temperature unit from one metric system to another
            Supported systems celsius,kelvin,fahrenheit
+           :param value: temperature value
            :param input_unit: input metric system
            :param output_unit: output metric system
            :param accuracy: rounded to the decimal places
@@ -77,7 +78,7 @@ class WeatherParser:
         try:
             temperature = float(value)
         except ValueError:
-            temperature = temperature.replace(",", ".", 1) # float will not convert numbers with , separators to float
+            temperature = str(value).replace(",", ".", 1)  # float will not convert numbers with , separators to float
             temperature = float(temperature)
         if input_unit == "kelvin" and output_unit == "celsius":
             temperature = round(temperature - 273.15, accuracy)

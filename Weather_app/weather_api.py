@@ -1,5 +1,5 @@
 import requests as rq
-from Weather_app.exceptions import UnsafeAdress
+from Weather_app.exceptions import UnsafeAddress
 from typing import AnyStr
 
 
@@ -33,11 +33,11 @@ class CurrentWeatherApi:
         self._check_url(allow_http)
 
     def _check_url(self, allow_http):
-        """allow_http: if false and api_link start with http:// raise exception UnsafeAdress"""
+        """allow_http: if false and api_link start with http:// raise exception UnsafeAddress"""
         if not self.api_link.startswith("https://"):
             if self.api_link.startswith("http"):
                 if allow_http is False:
-                    raise UnsafeAdress(
+                    raise UnsafeAddress(
                         "Use https instead of http"
                     )  # i should write custom_exception to now use http
                 if allow_http is True:

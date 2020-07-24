@@ -2,7 +2,7 @@ from pytest import raises
 import requests
 from Weather_app.weather_api import CurrentWeatherApi
 from Weather_app.configuration_loader import Config
-from Weather_app.exceptions import UnsafeAdress
+from Weather_app.exceptions import UnsafeAddress
 
 API_KEY = Config(
     "config.json"
@@ -19,7 +19,7 @@ def test_invalid_api_key():
 
 
 def test_http_use():
-    with raises(UnsafeAdress):
+    with raises(UnsafeAddress):
         CurrentWeatherApi(
             API_KEY,
             "Warsaw",
@@ -31,11 +31,11 @@ def test_http_use():
 def test_http_use_with_user_permission():
     assert (
             CurrentWeatherApi(
-            API_KEY,
-            "Warsaw",
-            allow_http=True,
-            api_link="http://api.openweathermap.org/data/2.5/weather?q={0}&appid={3}",
-        ).api_link
+                API_KEY,
+                "Warsaw",
+                allow_http=True,
+                api_link="http://api.openweathermap.org/data/2.5/weather?q={0}&appid={3}",
+            ).api_link
             == f"http://api.openweathermap.org/data/2.5/weather?q=Warsaw&appid={API_KEY}"
     )
 

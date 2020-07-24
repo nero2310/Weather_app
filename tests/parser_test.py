@@ -1,7 +1,8 @@
 from Weather_app.json_parser import temp_converter
 from Weather_app.json_parser import WeatherParser
 
-weather_to_parse = {"main": {"temp": 200}, "name": "Warsaw","sys":{"country": "Poland"}}
+weather_to_parse = {"main": {"temp": 200}, "name": "Warsaw", "sys": {"country": "Poland"}}
+
 
 # Example how test dictionary should look like for WeatherParser
 # self.property["temp"] = data["main"]["temp"]
