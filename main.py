@@ -1,10 +1,10 @@
 from flask import Flask,render_template, request, redirect, url_for
 from json import loads,dumps
-from classes.exceptions import UnsafeAdress
+from Weather_app.exceptions import UnsafeAdress
 
-from classes.json_parser import temp_converter,WeatherParser
-from classes.configuration_loader import Config
-from classes.weather_api import CurrentWeather
+from Weather_app.json_parser import temp_converter,WeatherParser
+from Weather_app.configuration_loader import Config
+from Weather_app.weather_api import CurrentWeatherApi
 from forms import GetWeatherForm
 
 conf = Config("config.json")
@@ -31,11 +31,11 @@ def weather_summary(city=None, country=None):
     if request.method == "POST":
         city = request.form["city_name"]
         country = request.form.get("country")
-        weather_data = CurrentWeather(api_key, city, state_code=None, country=country).make_request().json()
-        parser = WeatherParser(weather_data)
+        weather_dict = CurrentWeatherApi(api_key, city, state_code=None, country=country).make_request().json()
+        parser = WeatherParser(weather_dict)
         parser.temp_converter()
-        weather_data = parser.data()
-        return render_template("weather.html", weather=weather_data)
+        weather_dict = parser.weather_data()
+        return render_template("weather.html", weather=weather_dict)
     else:
         return redirect(url_for("get_weather")) # It will redirect user if he try to go to /weather_data manually
 

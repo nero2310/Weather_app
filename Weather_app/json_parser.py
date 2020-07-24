@@ -92,5 +92,5 @@ class WeatherParser:
 
         self.property["temp"] = temperature
 
-    def data(self):
+    def weather_data(self):
         return self.property

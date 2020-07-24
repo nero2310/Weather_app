@@ -1,9 +1,9 @@
 import requests as rq
-from classes.exceptions import UnsafeAdress
+from Weather_app.exceptions import UnsafeAdress
 from typing import AnyStr
 
 
-class CurrentWeather:
+class CurrentWeatherApi:
     """
     Parameters
     api_key:  api key to service whose provide weather information

@@ -1,6 +1,6 @@
 import json
 from pytest import raises
-from classes.configuration_loader import Config, create_base_config
+from Weather_app.configuration_loader import Config, create_base_config
 
 CONTENT_OF_FALSE_CONF = json.dumps({"False_api_key": "random_word"})
 

@@ -1,5 +1,5 @@
-from classes.json_parser import temp_converter
-from classes.json_parser import WeatherParser
+from Weather_app.json_parser import temp_converter
+from Weather_app.json_parser import WeatherParser
 
 weather_to_parse = {"main": {"temp": 200}, "name": "Warsaw","sys":{"country": "Poland"}}
 
@@ -24,7 +24,7 @@ def test_kelvins_to_cel():
 def test_temp_parser():
     dictonary = WeatherParser(weather_to_parse)
     dictonary.temp_converter("kelvin", "celsius")
-    assert dictonary.data()["temp"] == -73.1
+    assert dictonary.weather_data()["temp"] == -73.1
 
 
 def test_country_names_conversion():  # toDO convert country shortcut to full country name
