@@ -46,7 +46,10 @@ def timestamp_to_date(timestamp, timezone=0, time_format="%H:%M:%S"):
 
 
 class WeatherParser:
-
+    """
+    This class adjust data to send to client
+    :arg data weather data in json/dict
+    """
     def __init__(self, data):
         self.property = {}
         self.property["city_name"] = data["name"]
