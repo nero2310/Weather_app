@@ -47,3 +47,4 @@ class Config:
 
     def get_temperature_unit(self):
         return self.temp_unit
+

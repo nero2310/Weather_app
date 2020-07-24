@@ -8,10 +8,11 @@ from forms import GetWeatherForm
 
 conf = Config("config.json")
 api_key = conf.get_api_key()
+metric_system = conf.get_temperature_unit()
 
 app = Flask(__name__)
 
-app.config['SECRET_KEY'] = "9296e2354cf9eb6b4a52ca8be963c67a"
+app.config['SECRET_KEY'] = "9296e2354cf9eb6b4a52ca8be963c67a" # toDo change it before run in production
 
 
 @app.route("/")
@@ -26,13 +27,12 @@ def get_weather():
 
 
 @app.route("/weather_data", methods=["POST", "GET"])
-def weather_summary(city=None, country=None):
+def weather_summary():
     if request.method == "POST":
         city = request.form["city_name"]
         country = request.form.get("country")
         weather_dict = CurrentWeatherApi(api_key, city, state_code=None, country=country).make_request().json()
-        parser = WeatherParser(weather_dict)
-        parser.temp_converter()
+        parser = WeatherParser(weather_dict,accuracy=1)
         weather_dict = parser.weather_data()
         return render_template("weather.html", weather=weather_dict)
     else:

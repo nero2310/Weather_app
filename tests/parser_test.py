@@ -23,7 +23,6 @@ def test_kelvins_to_cel():
 
 def test_temp_parser():
     dictonary = WeatherParser(weather_to_parse)
-    dictonary.temp_converter("kelvin", "celsius")
     assert dictonary.weather_data()["temp"] == -73.1
 
 
