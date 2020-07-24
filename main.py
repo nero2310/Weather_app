@@ -23,14 +23,10 @@ def hello_word():
 @app.route("/weather", methods=["POST", "GET"])
 def get_weather():
     form = GetWeatherForm()
-    if request.method == "POST":
-        city = request.form["city_name"]
-        country = request.form.get("country", "None")
-        return redirect(url_for("weather_summary"), code=307)  # code 307 force using POST instead of GET
     return render_template("weather_form.html", form=form)
 
 
-@app.route("/weather_data", methods=["POST","GET"])
+@app.route("/weather_data", methods=["POST"])
 def weather_summary(city=None, country=None):
     if request.method == "POST":
         city = request.form["city_name"]
