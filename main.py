@@ -1,8 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
-from json import loads, dumps
 from Weather_app.exceptions import UnsafeAdress
 
-from Weather_app.json_parser import temp_converter, WeatherParser
+from Weather_app.json_parser import WeatherParser
 from Weather_app.configuration_loader import Config
 from Weather_app.weather_api import CurrentWeatherApi
 from forms import GetWeatherForm
