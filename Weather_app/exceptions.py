@@ -1,4 +1,4 @@
-class UnsafeAdress(Exception):
+class UnsafeAddress(Exception):
     """
     Exception occurred if user use http address instead of https.
     I highly disrecommend send data in http protocol because

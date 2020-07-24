@@ -1,6 +1,6 @@
 import json
 from pytest import raises
-from classes.configuration_loader import Config, create_base_config
+from Weather_app.configuration_loader import Config, create_base_config
 
 CONTENT_OF_FALSE_CONF = json.dumps({"False_api_key": "random_word"})
 
@@ -30,3 +30,7 @@ def test_create_base_conf(tmp_path):
     path.mkdir()
     path = tmp_path / "config.json"
     assert create_base_config(path) is None
+
+
+def test_data_visability():  # toDO create config whose will decide data is printed to website or not
+    assert True == False

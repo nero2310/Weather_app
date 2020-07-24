@@ -3,14 +3,14 @@
 Weather
 {% endblock title %}
 {% block content %}
-<form method="post" action=#>
+<form method="post" action={{url_for("weather_summary")}}>
     {{form.hidden_tag()}}
     <fieldset class="form-group">
         <legend class="border-bottom mb-4">Get Wheather Info</legend>
         <div class="form-group">
             {{form.city_name.label(class="form-control-label")}}
             {{form.city_name(class="form-control form-control-lg")}}
-        <div>
+        </div>
         <div class="form-group">
             {{form.country.label(class="form-control-label")}}
             {{form.country(class="form-control form-control-lg")}}
