@@ -1,7 +1,7 @@
 from classes.json_parser import temp_converter
 from classes.json_parser import WeatherParser
 
-weather_to_parse = {"main": {"temp": 200}, "name": "Warsaw", "country": "Poland"}
+weather_to_parse = {"main": {"temp": 200}, "name": "Warsaw","sys":{"country": "Poland"}}
 
 # Example how test dictionary should look like for WeatherParser
 # self.property["temp"] = data["main"]["temp"]

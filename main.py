@@ -26,13 +26,12 @@ def get_weather():
     if request.method == "POST":
         city = request.form["city_name"]
         country = request.form.get("country", "None")
-        return redirect(url_for("weather"), code=307)  # code is very important if didn't specify use default 302 code
-        # whose use GET in default
+        return redirect(url_for("weather_summary"), code=307)  # code 307 force using POST instead of GET
     return render_template("weather_form.html", form=form)
 
 
 @app.route("/weather_data", methods=["POST","GET"])
-def weather(city=None, country=None):
+def weather_summary(city=None, country=None):
     if request.method == "POST":
         city = request.form["city_name"]
         country = request.form.get("country")
@@ -40,9 +39,7 @@ def weather(city=None, country=None):
         parser = WeatherParser(weather_data)
         parser.temp_converter()
         weather_data = parser.data()
-        json_dict = loads(dumps(weather_data))
-        print(type(json_dict))
-        return render_template("weather.html", weather=json_dict)
+        return render_template("weather.html", weather=weather_data)
     else:
         return redirect(url_for("get_weather")) # It will redirect user if he try to go to /weather_data manually
 

@@ -55,9 +55,14 @@ class WeatherParser:
         sunrise = data.get("sys", {}).get("sunrise")
         sunset = data.get("sys", {}).get("sunset")
         self.property["timezone"] = data.get("timezone")
-        self.property["sunrise"] = timestamp_to_date(sunrise,self.property["timezone"])
-        self.property["sunset"] = timestamp_to_date(sunset,self.property["timezone"])
-
+        if sunrise is not None:
+            self.property["sunrise"] = timestamp_to_date(sunrise, self.property["timezone"])
+        else:
+            self.property["sunrise"] = None
+        if sunset is not None:
+            self.property["sunset"] = timestamp_to_date(sunset, self.property["timezone"])
+        else:
+            self.property["sunset"] = None
 
     def temp_converter(self, input_unit="kelvin", output_unit="celsius", accuracy=1):
         """
