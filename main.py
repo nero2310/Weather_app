@@ -1,8 +1,8 @@
-from flask import Flask,render_template, request, redirect, url_for
-from json import loads,dumps
+from flask import Flask, render_template, request, redirect, url_for
+from json import loads, dumps
 from Weather_app.exceptions import UnsafeAdress
 
-from Weather_app.json_parser import temp_converter,WeatherParser
+from Weather_app.json_parser import temp_converter, WeatherParser
 from Weather_app.configuration_loader import Config
 from Weather_app.weather_api import CurrentWeatherApi
 from forms import GetWeatherForm
@@ -26,7 +26,7 @@ def get_weather():
     return render_template("weather_form.html", form=form)
 
 
-@app.route("/weather_data", methods=["POST"])
+@app.route("/weather_data", methods=["POST", "GET"])
 def weather_summary(city=None, country=None):
     if request.method == "POST":
         city = request.form["city_name"]
@@ -37,7 +37,7 @@ def weather_summary(city=None, country=None):
         weather_dict = parser.weather_data()
         return render_template("weather.html", weather=weather_dict)
     else:
-        return redirect(url_for("get_weather")) # It will redirect user if he try to go to /weather_data manually
+        return redirect(url_for("get_weather"))  # It will redirect user if he try to go to /weather_data manually
 
 
 @app.errorhandler(UnsafeAdress)
@@ -50,4 +50,4 @@ def unsafe_adress_exception(UnsafeAdress):
 #     return render_template("unexpected_exception.html")
 
 
-app.run(debug=True,host="0.0.0.0")  # run flask server
+app.run(debug=True, host="0.0.0.0")  # run flask server
