@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
-from Weather_app.exceptions import UnsafeAddress
 
+from Weather_app.exceptions import UnsafeAddress
 from Weather_app.json_parser import WeatherParser
 from Weather_app.configuration_loader import Config
 from Weather_app.weather_api import CurrentWeatherApi
@@ -12,7 +12,7 @@ metric_system = conf.get_temperature_unit()
 
 app = Flask(__name__)
 
-app.config['SECRET_KEY'] = "9296e2354cf9eb6b4a52ca8be963c67a" # toDo change it before run in production
+app.config['SECRET_KEY'] = "9296e2354cf9eb6b4a52ca8be963c67a"  # toDo change it before run in production
 
 
 @app.route("/")
@@ -32,7 +32,7 @@ def weather_summary():
         city = request.form["city_name"]
         country = request.form.get("country")
         weather_dict = CurrentWeatherApi(api_key, city, state_code=None, country=country).make_request().json()
-        parser = WeatherParser(weather_dict,accuracy=1)
+        parser = WeatherParser(weather_dict, accuracy=1)
         weather_dict = parser.weather_data()
         return render_template("weather.html", weather=weather_dict)
     else:

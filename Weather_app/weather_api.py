@@ -45,7 +45,7 @@ class CurrentWeatherApi:
             self.api_link = "https://" + self.api_link
 
     def make_request(self):
-        """Return request response if connection succeed else raise exception"""
+        """Return request response if connection succeed else raise HTTPError"""
         data = rq.get(self.api_link.format(self.city_name, self.api_key))
         if data.ok:
             return data
