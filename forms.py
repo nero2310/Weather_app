@@ -8,3 +8,8 @@ class GetWeatherForm(FlaskForm):
     country = StringField("Country Name")
     state = StringField("State Name")
     submit = SubmitField("Get weather info")
+
+
+class NavbarForm(FlaskForm):
+    city_name = StringField(validators=[DataRequired(message="Enter city name")])
+    submit = SubmitField("Search")

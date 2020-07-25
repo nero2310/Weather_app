@@ -4,7 +4,7 @@ from Weather_app.exceptions import UnsafeAddress
 from Weather_app.json_parser import WeatherParser
 from Weather_app.configuration_loader import Config
 from Weather_app.weather_api import CurrentWeatherApi
-from forms import GetWeatherForm
+from forms import GetWeatherForm, NavbarForm
 
 conf = Config("config.json")
 api_key = conf.get_api_key()
@@ -23,7 +23,8 @@ def hello_word():
 @app.route("/weather", methods=["POST", "GET"])
 def get_weather():
     form = GetWeatherForm()
-    return render_template("weather_form.html", form=form)
+    navbar_form = NavbarForm()
+    return render_template("weather_form.html", form=form, navbar_form=navbar_form)
 
 
 @app.route("/weather_data", methods=["POST", "GET"])
