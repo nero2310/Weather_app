@@ -11,9 +11,11 @@ def test_config_file_not_found():
         Config(false_path).get_api_key()
 
 
+
 def test_config_pass():
     true_path = "config.json"
     assert Config(true_path).get_api_key()
+    assert Config(true_path).get_temperature_unit()
 
 
 def test_dont_containt_api_key(tmp_path):
