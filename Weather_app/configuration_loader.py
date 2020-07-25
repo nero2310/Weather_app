@@ -10,7 +10,9 @@ def get_config_path(path_to_config):
     return os.path.realpath(path_to_config)
 
 
-def create_base_config(path_to_config, content={"api_key": "sample_key"}):
+def create_base_config(path_to_config, content=None):
+    if content is None:
+        content = {"api_key": "sample_key", "temp_unit": "celsius"}
     path_to_config = Path(path_to_config)
     content = json.dumps(content, indent=4)
     if path_to_config.exists():
