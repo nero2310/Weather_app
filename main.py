@@ -43,7 +43,7 @@ def weather_summary():
 
 @app.errorhandler(UnsafeAddress)
 def unsafe_address_exception(UnsafeAddress):
-    return render_template("not_safe_adress_exception.html")
+    return render_template("error_pages/not_safe_adress_exception.html")
 
 
 # @app.errorhandler(Exception)  # this will catch all not caught exceptions
