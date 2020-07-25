@@ -17,7 +17,8 @@ app.config['SECRET_KEY'] = "9296e2354cf9eb6b4a52ca8be963c67a"  # toDo change it 
 
 @app.route("/")
 def hello_word():
-    return "Hello, World"
+    navbar_form = NavbarForm()
+    return render_template("main_site.html",navbar_form=navbar_form)
 
 
 @app.route("/weather", methods=["POST", "GET"])
