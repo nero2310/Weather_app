@@ -7,3 +7,12 @@ class UnsafeAddress(Exception):
 
     def __init__(self, message):
         super(Exception, self).__init__(message)
+
+
+class CityNotFoundOrApiNotResponse(Exception):
+    """
+    Exception occured if APiNotResponse, or city doesn't exist
+    """
+
+    def __init__(self, message):
+        super(Exception, self).__init__(message)

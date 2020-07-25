@@ -1,5 +1,5 @@
 import requests as rq
-from Weather_app.exceptions import UnsafeAddress
+from Weather_app.exceptions import UnsafeAddress,CityNotFoundOrApiNotResponse
 from typing import AnyStr
 
 
@@ -50,4 +50,4 @@ class CurrentWeatherApi:
         if data.ok:
             return data
         else:
-            raise rq.HTTPError
+            raise CityNotFoundOrApiNotResponse("City not found or Api doesn't respond")
