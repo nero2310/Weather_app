@@ -20,7 +20,7 @@ def test_kelvins_to_cel():
     assert temp_converter(10, "kelvin", "fahrenheit", accuracy=2) == -441.67
     assert temp_converter(10, "fahrenheit", "kelvin", accuracy=2) == 260.93
     assert temp_converter("1,2", "celsius", "fahrenheit", accuracy=2) == 34.16
-
+    assert temp_converter("62,49","kelvin","celsius",accuracy=2) == -210.66
 
 def test_temp_parser():
     dictonary = WeatherParser(weather_to_parse)
