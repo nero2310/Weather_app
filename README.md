@@ -1,9 +1,17 @@
 #### Weather_app 
-### Purpose
 Purpose of this project is to crate a local server with weather data 
-### Install
-1.This is very early version of project still in development   
-2.If you wanna contribute to project create pull request
+#### Install
+pip install -r requirements.txt \
+Generate you api key from https://openweathermap.org/appid \
+run createConfig.py \
+swap api_key to your api key
 
+### toDo
+-Sessions \
+-Logs \
+-MongoDB support 
+
+#### Contributions 
+Feel free to contribute
 #### License
 [MIT](https://choosealicense.com/licenses/mit/)

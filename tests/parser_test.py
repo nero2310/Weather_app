@@ -28,4 +28,4 @@ def test_temp_parser():
 
 
 def test_country_names_conversion():  # toDO convert country shortcut to full country name
-    assert False == True
+    assert False == True              # this shouldn't pass at this moment
