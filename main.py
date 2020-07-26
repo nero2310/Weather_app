@@ -47,7 +47,7 @@ def unsafe_address_exception(UnsafeAddress):
 
 
 @app.errorhandler(404)
-def page_not_found():
+def page_not_found(error):
     return render_template("error_pages/404_exception.html"), 404
 
 

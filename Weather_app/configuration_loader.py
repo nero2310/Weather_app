@@ -12,7 +12,9 @@ def get_config_path(path_to_config):
 
 def create_base_config(path_to_config, content=None):
     if content is None:
-        content = {"api_key": "sample_key", "temp_unit": "celsius"}
+        secret_key = os.urandom(20).hex()
+        content = {"api_key": "sample_key", "temp_unit": "celsius",
+                   "secret_key": secret_key}
     path_to_config = Path(path_to_config)
     content = json.dumps(content, indent=4)
     if path_to_config.exists():
@@ -41,8 +43,9 @@ class Config:
             config_json = json.load(file)
             self.api_key = config_json[
                 "api_key"
-            ]  # I don't catch exception, because program have to have api_key to work
+            ]  # I don't catch exception, because program had to have api_key to work
             self.temp_unit = config_json["temp_unit"]
+            self.secret_key = config_json["secret_key"]
 
     def get_api_key(self):
         return self.api_key
@@ -50,3 +53,5 @@ class Config:
     def get_temperature_unit(self):
         return self.temp_unit
 
+    def get_secret_key(self):
+        return self.secret_key

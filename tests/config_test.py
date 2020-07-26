@@ -7,15 +7,15 @@ CONTENT_OF_FALSE_CONF = json.dumps({"False_api_key": "random_word"})
 
 def test_config_file_not_found():
     false_path = "false_config.json"
-    with raises(FileNotFoundError):
+    with raises(FileNotFoundError):  # check if error was raised if config not exists
         Config(false_path).get_api_key()
 
 
-
-def test_config_pass():
+def test_config_pass():  # checks the correctness of the configuration
     true_path = "config.json"
     assert Config(true_path).get_api_key()
     assert Config(true_path).get_temperature_unit()
+    assert Config(true_path).get_secret_key()
 
 
 def test_dont_containt_api_key(tmp_path):
@@ -27,12 +27,13 @@ def test_dont_containt_api_key(tmp_path):
         Config(conf_file).get_api_key()
 
 
-def test_create_base_conf(tmp_path):
-    path = tmp_path / "test_dir"
+def test_base_config_creator(tmp_path):
+    path = tmp_path / "base_conf"
     path.mkdir()
     path = tmp_path / "config.json"
-    assert create_base_config(path) is None
-
-
-def test_data_visability():  # toDO create config whose will decide data is printed to website or not
-    assert True == False
+    create_base_config(path)
+    with open(path, "r") as file:
+        json_dict = json.load(file)
+    assert json_dict["api_key"]
+    assert json_dict["secret_key"]
+    assert json_dict["temp_unit"]

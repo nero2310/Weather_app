@@ -1,8 +1,8 @@
 from pytest import raises
-import requests
+
 from Weather_app.weather_api import CurrentWeatherApi
 from Weather_app.configuration_loader import Config
-from Weather_app.exceptions import UnsafeAddress
+from Weather_app.exceptions import UnsafeAddress, CityNotFoundOrApiNotResponse
 
 API_KEY = Config(
     "config.json"
@@ -14,7 +14,7 @@ def test_connection():
 
 
 def test_invalid_api_key():
-    with raises(requests.HTTPError):
+    with raises(CityNotFoundOrApiNotResponse):
         CurrentWeatherApi("invalid_api_key", "Warsaw").make_request()
 
 
