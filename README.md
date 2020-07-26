@@ -6,6 +6,9 @@ Generate you api key from https://openweathermap.org/appid \
 run createConfig.py \
 swap api_key to your api key
 
+in terminal:
+export FLASK_APP=main.py
+python3 main.py
 ### toDo
 -Sessions \
 -Logs \
