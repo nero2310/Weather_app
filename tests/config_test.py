@@ -17,7 +17,7 @@ def test_config_pass():  # checks the correctness of the configuration
     assert Config(true_path).get_temperature_unit()
     assert Config(true_path).get_secret_key()
 
-
+    
 def test_dont_containt_api_key(tmp_path):
     path = tmp_path / "test_dir"
     path.mkdir()
