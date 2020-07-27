@@ -1,0 +1,20 @@
+{% extends "base_bootstrap.html"  %}
+{% block title %}
+Country codes
+{% endblock %}
+{% block content %}
+<table class="table table-sm">
+<tr>
+    <th scope="col">Country Code</th>
+    <th scope="col">Country Name</th>
+</tr>
+{% for code,country in codes.items() %}
+    <tbody>
+    <tr>
+        <td>{{code}}</td>
+        <td>{{country}}</td>
+    </tr>
+    </tbody>
+{% endfor %}
+</table>
+{% endblock %}

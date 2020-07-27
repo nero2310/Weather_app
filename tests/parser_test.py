@@ -1,5 +1,6 @@
-from Weather_app.json_parser import temp_converter
-from Weather_app.json_parser import WeatherParser
+from pytest import raises
+
+from Weather_app.json_parser import temp_converter,WeatherParser,CityCodes
 
 weather_to_parse = {"main": {"temp": 200}, "name": "Warsaw", "sys": {"country": "Poland"}}
 
@@ -27,5 +28,14 @@ def test_temp_parser():
     assert dictonary.weather_data()["temp"] == -73.1
 
 
-def test_country_names_conversion():  # toDO convert country shortcut to full country name
-    assert False == True              # this shouldn't pass at this moment
+def test_country_names_conversion():
+    codes = CityCodes("city_list.json")
+    assert codes.get_fullname("PL") == "Poland"
+    assert codes.get_fullname("US") == "United States"
+    assert codes.get_fullname("CA") == "Canada"
+    assert codes.get_country_code("Canada") =="CA"
+    assert codes.get_country_code("United States") == "US"
+    with raises(KeyError):
+        assert codes.get_fullname("SPAM")
+        assert codes.get_country_code("SPAM")
+
