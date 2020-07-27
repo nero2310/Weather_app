@@ -1,4 +1,5 @@
 from datetime import datetime
+from json import load
 
 
 # Kelvins-273.15 = Celsius
@@ -97,3 +98,23 @@ class WeatherParser:
 
     def weather_data(self):
         return self.property
+
+
+class CityCodes:
+    def __init__(self, path_to_file):
+        with open(path_to_file, "r") as file:
+            self.json_obj = load(file)
+
+    def get_fullname(self, code):
+        try:
+            return self.json_obj[code]
+        except KeyError:
+            print("This country code doesn't exist")
+            raise KeyError
+
+    def get_country_code(self, fullname):
+        code = [key for (key, value) in self.json_obj.items() if value == fullname]
+        if len(code) != 0:
+            return code[0]
+        else:
+            raise KeyError

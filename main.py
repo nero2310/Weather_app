@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 
-from Weather_app.exceptions import UnsafeAddress,CityNotFoundOrApiNotResponse
+from Weather_app.exceptions import UnsafeAddress, CityNotFoundOrApiNotResponse
 from Weather_app.json_parser import WeatherParser
 from Weather_app.configuration_loader import Config
 from Weather_app.weather_api import CurrentWeatherApi
@@ -41,6 +41,7 @@ def weather_summary():
         return redirect(url_for("get_weather"))  # It will redirect user if he try to go to /weather_data manually
 
 
+
 @app.errorhandler(UnsafeAddress)
 def unsafe_address_exception(UnsafeAddress):
     return render_template("error_pages/not_safe_adress_exception.html")
@@ -54,6 +55,13 @@ def page_not_found(error):
 @app.errorhandler(CityNotFoundOrApiNotResponse)
 def city_not_found(CityNotFoundOrApiNotResponse):
     return render_template("error_pages/city_not_found_exception.html")
+
+
+@app.route("/country_codes")
+def country_list():
+    with open("city_list.json","r") as file:
+        pass
+
 
 # @app.errorhandler(Exception)  # this will catch all not caught exceptions
 # def unexpected_exception(Exception):
