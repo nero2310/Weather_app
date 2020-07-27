@@ -118,3 +118,6 @@ class CityCodes:
             return code[0]
         else:
             raise KeyError
+
+    def get_all(self):
+        return self.json_obj

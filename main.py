@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 
 from Weather_app.exceptions import UnsafeAddress, CityNotFoundOrApiNotResponse
-from Weather_app.json_parser import WeatherParser
+from Weather_app.json_parser import WeatherParser,CityCodes
 from Weather_app.configuration_loader import Config
 from Weather_app.weather_api import CurrentWeatherApi
 from forms import GetWeatherForm, NavbarForm
@@ -59,8 +59,9 @@ def city_not_found(CityNotFoundOrApiNotResponse):
 
 @app.route("/country_codes")
 def country_list():
-    with open("city_list.json","r") as file:
-        pass
+    codes = CityCodes("city_list.json")
+    navbar_form = NavbarForm()
+    return render_template("list_of_countries_codes.html",codes=codes.get_all(),navbar_form=navbar_form)
 
 
 # @app.errorhandler(Exception)  # this will catch all not caught exceptions
